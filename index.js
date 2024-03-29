@@ -24,9 +24,17 @@ async function run() {
 
     const reviewCollection = client.db("shilaFashionDB").collection("reviews");
     const userCollection = client.db("shilaFashionDB").collection("users");
+    const cartCollection = client.db("shilaFashionDB").collection("carts");
     const productCollection = client
       .db("shilaFashionDB")
       .collection("products");
+
+    // carts collecion apis route
+    app.post("/carts", async (req, res) => {
+      const item = req.body;
+      const result = await cartCollection.insertOne(item);
+      res.send(result);
+    });
 
     // products collecion apis route
     app.get("/products", async (req, res) => {
